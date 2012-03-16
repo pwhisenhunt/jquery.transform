@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<script src="../jquery.transform.js" type="text/javascript"></script>
+		<script>
+			$(function(){
+				$("#example").transform("setAnimationDuration", 1).transform("rotateX", 300);
+				$("#example").click(function(){
+					$(this).transform("rotateY", 50).transform("rotateX", 25).transform("increaseWidth", 25);
+				});
+			})
+		</script>
+		<style>
+			#example {
+				background-color:red;
+				width:50px;
+				height:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			Click on the red square!
+		</p>
+		<div id="example">
+			
+		</div>
+	</body>
+</html>
