@@ -1,7 +1,8 @@
 /*
 * jquery.transform.js
-* Check out the git repo for more info about this jQuery plugin.
-* https://github.com/pwhisenhunt/jquery.transform
+* Visit the internets for documentation, updates and examples.
+* https://github.com/pwhisenhunt/jquery.transform.js
+*
 *
 * Copyright (c) 2010 Phillip J. Whisenhunt phillip.whisenhunt@gmail.com http://phillipwhisenhunt.com
 * 
@@ -28,7 +29,29 @@
 */
 
 (function( $ ){
-	var methods = {
+	var methods = {		
+		/**
+ 		* Decrease the height of the given element.
+ 		* @param {value} px The amount in pixels to decrease height of the element.
+ 		*/
+		decreaseHeight : function( value ) {
+    	return this.each(function(){
+				$(this).data({ 'height' : ($(this).data("height") - value) });
+				$(this).animate({ height:  $(this).data("height") }, $(this).data('animationDuration') * 1000);	//multiply by 1000 since animationDuration is in secs.
+			});
+		},
+		
+		/**
+ 		* Decrease the width of the given element.
+ 		* @param {value} px The amount in pixels to decrease the width of the element.
+ 		*/
+		decreaseWidth : function( value ) {
+    	return this.each(function(){
+				$(this).data({ 'width' : ($(this).data("width") - value) });
+				$(this).animate({ width:  $(this).data("width") }, $(this).data('animationDuration') * 1000);	//multiply by 1000 since animationDuration is in secs.
+			});
+		},
+		
 		/** Returns the x-axis position of the element */
 		getX : function() { if(!isNaN($(this).data('x'))){ return $(this).data('x'); } else{ init(this); return 0; }; },
 		/** Returns the y-axis position of the element */
@@ -50,6 +73,28 @@
 		/** Returns the elements amount of rotation about the z-axis */
 		getRotationZ : function() { if(!isNaN($(this).data('rotationZ'))){ return $(this).data('rotationZ'); } else{ init(this); return 0; }; },
 	
+		/**
+ 		* Increases the height of the given element.
+ 		* @param {value} px The amount in pixels to increase the height of the element.
+ 		*/
+		increaseHeight : function( value ) {
+    	return this.each(function(){
+				$(this).data({ 'height' : (value + $(this).data("height")) });
+				$(this).animate({ height:  $(this).data("height") }, $(this).data('animationDuration') * 1000);	//multiply by 1000 since animationDuration is in secs.
+			});
+		},
+		
+		/**
+ 		* Increases the width of the given element.
+ 		* @param {value} px The amount in pixels to increase the width of the element.
+ 		*/
+		increaseWidth : function( value ) {
+    	return this.each(function(){
+				$(this).data({ 'width' : (value + $(this).data("width")) });
+				$(this).animate({ width:  $(this).data("width") }, $(this).data('animationDuration') * 1000);	//multiply by 1000 since animationDuration is in secs.
+			});
+		},
+
 		/**
 	 	* Rotates the element along the x axis in addition to the current rotation.
 	 	* @param {value} deg The degree of rotation along the x-axis
@@ -375,22 +420,20 @@
 	};
 	
 	/**
- 	* Updates the webkit transformation of an element based on stored data.
+ 	* Updates the webkit, moz, and transform transformation of the element based on stored data.
  	* @param {element} The element to transform.
  */
 	function updateTransform(element){
-		$(element).css("-webkit-transition", "-webkit-transform " + $(element).data('animationDuration') + "s");
-		$(element).css("-webkit-transform-style","preserve-3d");
-
-		var transformation = "";
-		transformation += " translateX(" + $(element).data('x') + "px)";
-		transformation += " translateY(" + $(element).data('y') + "px)";
-		transformation += " translateZ(" + $(element).data('z') + "px)";
-		transformation += " scale(" + $(element).data('scale') + ")";		
-		transformation += " rotateX(" + $(element).data('rotationX') + "deg)";
-		transformation += " rotateY(" + $(element).data('rotationY') + "deg)";
-		transformation += " rotateZ(" + $(element).data('rotationZ') + "deg)";
-		$(element).css("-webkit-transform", transformation);
+		$(element).css({ "-webkit-transition": "-webkit-transform " + $(element).data('animationDuration') + "s",
+		"-webkit-transform-style": "preserve-3d", 
+		"-webkit-transform": "translateX(" + $(element).data('x') + "px)" + " translateY(" + $(element).data('y') + "px)" +  " translateZ(" + $(element).data('z') + "px)" + " scale(" + $(element).data('scale') + ")" + " rotateX(" + $(element).data('rotationX') + "deg)" + " rotateY(" + $(element).data('rotationY') + "deg)" + " rotateZ(" + $(element).data('rotationZ') + "deg)",
+		"-moz-transform": "translateX(" + $(element).data('x') + "px)" + " translateY(" + $(element).data('y') + "px)" +  " translateZ(" + $(element).data('z') + "px)" + " scale(" + $(element).data('scale') + ")" + " rotateX(" + $(element).data('rotationX') + "deg)" + " rotateY(" + $(element).data('rotationY') + "deg)" + " rotateZ(" + $(element).data('rotationZ') + "deg)",
+		"-moz-transition": "-moz-transform " + $(element).data('animationDuration') + "s",
+		"-moz-transform-style": "preserve-3d",
+		"transform": "translateX(" + $(element).data('x') + "px)" + " translateY(" + $(element).data('y') + "px)" +  " translateZ(" + $(element).data('z') + "px)" + " scale(" + $(element).data('scale') + ")" + " rotateX(" + $(element).data('rotationX') + "deg)" + " rotateY(" + $(element).data('rotationY') + "deg)" + " rotateZ(" + $(element).data('rotationZ') + "deg)",
+		"transition": "transform " + $(element).data('animationDuration') + "s",
+		"transform-style": "preserve-3d",
+	  });
 	}
 	
 	/**
@@ -424,23 +467,22 @@
 		// override defaults values with those passed in by the user
 		options = $.extend(defaults, options);
 		
-			//trigger 3D hardware accelleration
-			$(element).css("-webkit-transition", "translateZ(0px) translateX(0px) translateY(0px)");
-			$(element).css("-webkit-transform-style", "preserve-3d");
-			
-			//store the data associated with the dom element.
-			$(element).data({
-				"x" : options.x, 
-				"y" : options.y, 
-				"z" : options.z, 
-				"rotationX" : options.rotationX, 
-				"rotationY" : options.rotationY, 
-				"rotationZ" : options.rotationX,
-				"scale": 1,
-				"animationDuration": options.animationDuration,
-				"width" : options.width, 
-				"height" : options.height
-				});
+		//trigger 3D hardware accelleration
+		$(element).css({"-webkit-transition": "translateZ(0px) translateX(0px) translateY(0px)", "-webkit-transform-style": "preserve-3d", "-moz-transition": "translateZ(0px) translateX(0px) translateY(0px)", "-moz-transform-style": "preserve-3d", "transition": "translateZ(0px) translateX(0px) translateY(0px)", "transform-style": "preserve-3d",});
+		
+		//store the data associated with the dom element.
+		$(element).data({
+			"x" : options.x, 
+			"y" : options.y, 
+			"z" : options.z, 
+			"rotationX" : options.rotationX, 
+			"rotationY" : options.rotationY, 
+			"rotationZ" : options.rotationX,
+			"scale": 1,
+			"animationDuration": options.animationDuration,
+			"width" : options.width, 
+			"height" : options.height
+			});
 	}
 
 	/**
