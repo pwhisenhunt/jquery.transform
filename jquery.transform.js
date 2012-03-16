@@ -28,11 +28,21 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
+
+/** @fileoverview jQuery Transform - A jQuery plugin for 3D and 2D transformations.
+ *  @author  Phillip J. Whisenhunt
+ *  @version 1.0
+ *  @requires jQuery 1.6 +
+ */
 (function( $ ){
+	/** @class jQuery.Transform
+	*/
 	var methods = {		
-		/**
- 		* Decrease the height of the given element.
- 		* @param {value} px The amount in pixels to decrease height of the element.
+		/** Decrease the height of the given element.
+ 		* @param {int} value The amount in pixels to decrease height of the element.
+		* @return {void} none
+		* @name decreaseHeight
+		* @function
  		*/
 		decreaseHeight : function( value ) {
     	return this.each(function(){
@@ -41,9 +51,11 @@
 			});
 		},
 		
-		/**
- 		* Decrease the width of the given element.
- 		* @param {value} px The amount in pixels to decrease the width of the element.
+		/** Decrease the width of the given element.
+ 		* @param {int} value The amount in pixels to decrease the width of the element.
+		* @return {void} none
+		* @name decreaseWidth
+		* @function
  		*/
 		decreaseWidth : function( value ) {
     	return this.each(function(){
@@ -52,30 +64,73 @@
 			});
 		},
 		
-		/** Returns the x-axis position of the element */
+		/** Returns the x-axis position of the element
+		* @return {int} x-axis value
+		* @name getX
+		* @function
+		 */
 		getX : function() { if(!isNaN($(this).data('x'))){ return $(this).data('x'); } else{ init(this); return 0; }; },
-		/** Returns the y-axis position of the element */
+		/** Returns the y-axis position of the element 
+		* @return {int} y-axis value
+		* @name getY
+		* @function
+		*/
 		getY : function() { if(!isNaN($(this).data('y'))){ return $(this).data('y'); } else{ init(this); return 0; }; },
-		/** Returns the z-axis position of the element */
+		/** Returns the z-axis position of the element 
+		* @return {int} z-axis value
+		* @name getZ
+		* @function
+		*/
 		getZ : function() { if(!isNaN($(this).data('z'))){ return $(this).data('z'); } else{ init(this); return 0; }; },
-		/** Returns the scale of the element */
+		/** Returns the scale of the element 
+		* @return {int} scale value
+		* @name getScale
+		* @function
+		*/
 		getScale : function() { if(!isNaN($(this).data('scale'))){ return $(this).data('scale'); } else{ init(this); return 0; }; },
-		/** Returns the animation duration of the element */
+		/** Returns the animation duration of the element 
+		* @return {float} animation duration value
+		* @name getAnimationDuration
+		* @function
+		*/
 		getAnimationDuration : function() { if(!isNaN($(this).data('animationDuration'))){ return $(this).data('animationDuration'); } else{ init(this); return 0; }; },
-		/** Returns the width of the element */
+		/** Returns the width of the element 
+		* @return {int} width value
+		* @name getWidth
+		* @function
+		*/
 		getWidth : function() { if(!isNaN($(this).data('width'))){ return $(this).data('width'); } else{ init(this); return $(this).outerWidth(); }; },
-		/** Returns the height of the element */
+		/** Returns the height of the element 
+		* @return {int} height value
+		* @name getHeight
+		* @function
+		*/
 		getHeight : function() { if(!isNaN($(this).data('width'))){ return $(this).data('width'); } else{ init(this); return $(this).outerHeight(); }; },
-		/** Returns the elements amount of rotation about the x-axis */
+		/** Returns the elements amount of rotation about the x-axis 
+		* @return {int} x rotation value
+		* @name getRotationX
+		* @function
+		*/
 		getRotationX : function() { if(!isNaN($(this).data('rotationX'))){ return $(this).data('rotationX'); } else{ init(this); return 0; }; },
-		/** Returns the elements amount of rotation about the y-axis */
+		/** Returns the elements amount of rotation about the y-axis 
+		* @return {int} y rotation value
+		* @name getRotationY
+		* @function
+		*/
 		getRotationY : function() { if(!isNaN($(this).data('rotationY'))){ return $(this).data('rotationY'); } else{ init(this); return 0; }; },
-		/** Returns the elements amount of rotation about the z-axis */
+		/** Returns the elements amount of rotation about the z-axis 
+		* @return {int} z rotation value
+		* @name getRotationZ
+		* @function
+		*/
 		getRotationZ : function() { if(!isNaN($(this).data('rotationZ'))){ return $(this).data('rotationZ'); } else{ init(this); return 0; }; },
 	
 		/**
  		* Increases the height of the given element.
- 		* @param {value} px The amount in pixels to increase the height of the element.
+ 		* @param {int} value The amount in pixels to increase the height of the element.
+		* @return {void} none
+		* @name increaseHeight
+		* @function
  		*/
 		increaseHeight : function( value ) {
     	return this.each(function(){
@@ -86,7 +141,10 @@
 		
 		/**
  		* Increases the width of the given element.
- 		* @param {value} px The amount in pixels to increase the width of the element.
+ 		* @param {int} value The amount in pixels to increase the width of the element.
+		* @return {void} none
+		* @name increaseWidth
+		* @function
  		*/
 		increaseWidth : function( value ) {
     	return this.each(function(){
@@ -97,7 +155,10 @@
 
 		/**
 	 	* Rotates the element along the x axis in addition to the current rotation.
-	 	* @param {value} deg The degree of rotation along the x-axis
+	 	* @param {int} value The degree of rotation along the x-axis
+		* @return {int} none
+		* @name rotateX
+		* @function
 	 */
 		rotateX : function( value ){
 			return this.each(function(){
@@ -114,7 +175,10 @@
 		
 		/**
 	 	* Rotates the element along the y axis in addition to the current rotation.
-	 	* @param {value} deg The degree of rotation along the y-axis
+	 	* @param {int} value The degree of rotation along the y-axis
+		* @return {int} none
+		* @name rotateY
+		* @function
 	 */
 		rotateY : function( value ){
 			return this.each(function(){
@@ -131,7 +195,10 @@
 		
 		/**
 	 	* Rotates the element along the z axis in addition to the current rotation.
-	 	* @param {value} deg The degree of rotation along the z-axis
+	 	* @param {int} value The degree of rotation along the z-axis
+		* @return {int} none
+		* @name rotateZ
+		* @function
 	 */
 		rotateZ : function( value ){
 			return this.each(function(){
@@ -148,9 +215,12 @@
 		
 		/**
 	 	* Rotates the element along the x, y, and z-axis.
-	 	* @param {x} deg The amount of rotation along x-axis.
-	 	* @param {y} deg The amount of rotation along y-axis.
-	 	* @param {z} deg The amount of rotation along z-axis.
+	 	* @param {int} y The amount of rotation along x-axis.
+	 	* @param {int} x The amount of rotation along y-axis.
+	 	* @param {int} z The amount of rotation along z-axis.
+		* @return {void} none
+		* @name rotateXYZ
+		* @function
 	 */
 		rotateXYZ : function( x, y, z ){
 			return this.each(function(){
@@ -169,7 +239,10 @@
 		
 		/**
 	 	* Sets the animation duration of the given element.
-	 	* @param {value} The animation duration for the given element.
+	 	* @param {int} value The animation duration for the given element.
+		* @return {void} none
+		* @name setAnimationDuration
+		* @function
 	 */
 		setAnimationDuration : function( value ){
 			return this.each(function(){
@@ -186,7 +259,10 @@
 
 		/**
  		* Sets the height of the given element.
- 		* @param {value} px The height of the element.
+ 		* @param {int} value The height of the element.
+		* @return {void} none
+		* @name setHeight
+		* @function
  		*/
 		setHeight : function( value ){
 			return this.each(function(){
@@ -197,7 +273,10 @@
 		
 		/**
  		* Sets the width of the given element.
- 		* @param {value} px The width of the element.
+ 		* @param {int} value The width of the element.
+		* @return {void} none
+		* @name setWidth
+		* @function
  		*/
 		setWidth : function( value ) {
     	return this.each(function(){
@@ -208,7 +287,10 @@
 
 		/**
  		* Sets the scale of the given element.
- 		* @param {value} The scale of the given element.
+ 		* @param {int} value The scale of the given element.
+		* @return {void} none
+		* @name setScale
+		* @function
  		*/
 		setScale : function( value ){
 			return this.each(function(){
@@ -225,7 +307,10 @@
 
 		/**
  		* Sets the elements x position.
- 		* @param {value} px The position along the x-axis to set the element.
+ 		* @param {int} value The position along the x-axis to set the element.
+		* @return {void} none
+		* @name setX
+		* @function
  		*/
 		setX : function( value ){
 			return this.each(function(){
@@ -242,7 +327,10 @@
 		
 		/**
 	 	* Sets the elements y position.
-	 	* @param {value} px The position along the y-axis to set the element.
+	 	* @param {int} value The position along the y-axis to set the element.
+		* @return {void} none
+		* @name setY
+		* @function
 	 */
 		setY : function( value ){
 			return this.each(function(){
@@ -259,7 +347,10 @@
 		
 		/**
 	 	* Sets the elements z position.
-	 	* @param {value} px The position along the z-axis to set the element.
+	 	* @param {int} value The position along the z-axis to set the element.
+		* @return {void} none
+		* @name setZ
+		* @function
 	 */
 		setZ : function( value ){
 			return this.each(function(){
@@ -274,9 +365,11 @@
 			});
 		},
 
-		/**
-	 	* Sets the amount of rotation of the x-axis.
-	 	* @param {value} deg The amount of rotation along the x-axis.
+		/** Sets the amount of rotation of the x-axis.
+	 	* @param {int} value The amount of rotation along the x-axis.
+		* @return {void} none
+		* @name setRotationX
+		* @function
 	 */
 		setRotationX : function( value ){
 			return this.each(function(){
@@ -293,9 +386,12 @@
 		
 		/**
 	 	* Sets the amount of rotation along the x, y, and z-axis.
-	 	* @param {x} deg The amount of rotation along the x-axis.
-	 	* @param {y} deg The amount of rotation along the y-axis.
-	 	* @param {z} deg The amount of rotation along the z-axis.	
+	 	* @param {int} x The amount of rotation along the x-axis.
+	 	* @param {int} y The amount of rotation along the y-axis.
+	 	* @param {int} z The amount of rotation along the z-axis.	
+		* @return {void} none
+		* @name setRotationXYZ
+		* @function
 	 */
 		setRotationXYZ : function( x, y, z ){
 			return this.each(function(){
@@ -314,7 +410,10 @@
 		
 		/**
 	 	* Sets the amount of rotation of the y-axis.
-	 	* @param {value} deg The amount of rotation along the y-axis.
+	 	* @param {int} value The amount of rotation along the y-axis.
+		* @return {void} none
+		* @name setRotationY
+		* @function
 	 */
 		setRotationY : function( value ){
 			return this.each(function(){
@@ -331,7 +430,10 @@
 		
 		/**
 	 	* Sets the amount of rotation of the z-axis.
-	 	* @param {value} deg The amount of rotation along the z-axis.
+	 	* @param {int} value The amount of rotation along the z-axis.
+		* @return {void} none
+		* @name setRotationZ
+		* @function
 	 */
 		setRotationZ : function( value ){
 			return this.each(function(){
@@ -348,7 +450,10 @@
 				
 		/**
 	 	* Translates the element along the x axis.
-	 	* @param {value} px The amount to translate on the x-axis
+	 	* @param {int} value The amount to translate on the x-axis
+		* @return {void} none
+		* @name translateX
+		* @function
 	 */
 		translateX : function( value ){
 			return this.each(function(){
@@ -365,9 +470,12 @@
 		
 		/**
 	 	* Translates the element along the x, y, and z-axis.
-	 	* @param {x} px The amount of translation along x-axis.
-	 	* @param {y} px The amount of translation along y-axis.
-	 	* @param {z} px The amount of translation along z-axis.
+	 	* @param {int} x The amount of translation along x-axis.
+	 	* @param {int} y The amount of translation along y-axis.
+	 	* @param {int} z The amount of translation along z-axis.
+		* @return {void} none
+		* @name translateXYZ
+		* @function
 	 */
 		translateXYZ : function( x, y, z ){
 			return this.each(function(){
@@ -386,7 +494,10 @@
 		
 		/**
 	 	* Translates the element along the y axis.
-	 	* @param {value} px The amount to translate on the y-axis
+	 	* @param {int} value The amount to translate on the y-axis
+		* @return {void} none
+		* @name translateY
+		* @function
 	 */
 		translateY : function( value ){
 			return this.each(function(){
@@ -403,7 +514,10 @@
 		
 		/**
 	 	* Translates the element along the z axis.
-	 	* @param {value} px The amount to translate on the z-axis
+	 	* @param {int} value The amount to translate on the z-axis
+		* @return {void} none
+		* @name translateZ
+		* @function
 	 */
 		translateZ : function( value ){
 			return this.each(function(){
@@ -421,7 +535,10 @@
 	
 	/**
  	* Updates the webkit, moz, and transform transformation of the element based on stored data.
- 	* @param {element} The element to transform.
+ 	* @param {DOM element} element The element to transform.
+	* @return {void} none
+	* @name updateTransform
+	* @function
  */
 	function updateTransform(element){
 		$(element).css({ "-webkit-transition": "-webkit-transform " + $(element).data('animationDuration') + "s",
@@ -438,17 +555,20 @@
 	
 	/**
  	* Sets 3D data corresponding to a DOM element.
-	* @param {element} the element to update.
- 	* @param {rotationX} deg.
- 	* @param {rotationY} deg.
- 	* @param {rotationZ} deg.
- 	* @param {x} px.
- 	* @param {y} px.
- 	* @param {z} px.
- 	* @param {scale} .
- 	* @param {animationDuration} s.
- 	* @param {width} px.
- 	* @param {height} px.
+	* @param {element} element the element to update.
+ 	* @param {int} rotationX
+ 	* @param {int} rotationY
+ 	* @param {int} rotationZ
+ 	* @param {int} x
+ 	* @param {int} y
+ 	* @param {int} z
+ 	* @param {int} scale
+ 	* @param {int} animationDuration
+ 	* @param {int} width
+ 	* @param {int} height
+	* @return {void} none
+	* @name init
+	* @function
  */
 	function init(element, options){
 		// default values
@@ -487,7 +607,10 @@
 
 	/**
  	* Extending the jQuery namespace for the plugin.
- 	* @param {method} The method to call.
+ 	* @param {string} method The method to call.
+	* @return {void} none
+	* @name $.fn.tranform
+	* @function
  */
 	$.fn.transform = function( method ) {
 		if ( methods[method] ) {
